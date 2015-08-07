@@ -1,0 +1,113 @@
+<html>
+  <head>
+    <title>INE eChile | Estadisticas para eRepublik Chile</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel='stylesheet' href='common.css' type='text/css' />
+       
+    <style>
+        .label {
+            color: #91AA9D;
+            margin-top: 0.5em;
+            padding: 0.1em;
+            font-family: 'verdana', 'helvetica', sans serif;
+        }        
+        
+        .timeplot-grid-label {
+            color: #333;
+            font-family: 'verdana', 'helvetica', sans serif;
+            font-size: 9px !important;
+        }
+        
+        .sources {
+            font-size: 90%;
+        }
+    </style>
+    
+    <!-- For your own use, replace api/timeplot-api.js with http://api.simile-widgets.org/timeplot/1.1/timeplot-api.js -->
+    <script type="text/javascript" src="http://api.simile-widgets.org/timeplot/1.1/timeplot-api.js"></script>
+
+    
+    <script>
+        var timeplot1;
+
+        function onLoad() {
+
+            var red = new Timeplot.Color('#B9121B');
+            var blue = new Timeplot.Color('#193441');
+            var green = new Timeplot.Color('#468966');
+            var lightGreen = new Timeplot.Color('#5C832F');
+            var fill1 = new Timeplot.Color('#D1DBBD');
+			fill1.transparency(0.75);
+			var fill2 = new Timeplot.Color('#bdd7db');
+            fill2.transparency(0.75);
+			
+            var gridColor  = new Timeplot.Color('#000000');
+
+            var timeGeometry = new Timeplot.DefaultTimeGeometry({
+                gridColor: gridColor,
+                axisLabelsPlacement: "bottom"
+            });
+
+            var geometry1 = new Timeplot.DefaultValueGeometry({
+                gridColor: gridColor,
+                axisLabelsPlacement: "left",
+                min: 25,
+				max: 55
+            });
+
+            var eventSource1 = new Timeplot.DefaultEventSource();
+            var dataSource1 = new Timeplot.ColumnSource(eventSource1,1);
+            
+            var plotInfo1 = [
+                Timeplot.createPlotInfo({
+                    id: "Citizens",
+                    dataSource: dataSource1,
+                    timeGeometry: timeGeometry,
+                    valueGeometry: geometry1,
+                    lineColor: green,
+                    showValues: true,
+					fillColor: fill1,
+                    fillGradient: false,
+					roundValues: false
+										})
+				];
+			
+            timeplot1 = Timeplot.create(document.getElementById("timeplot1"), plotInfo1);
+            timeplot1.loadText("vitalidad.txt", "|", eventSource1);
+        }            
+        
+        var resizeTimerID = null;
+        function onResize() {
+            if (resizeTimerID == null) {
+                resizeTimerID = window.setTimeout(function() {
+                    resizeTimerID = null;
+                    if (timeplot1) timeplot1.repaint();
+                }, 0);
+            }
+        }
+    </script>
+    
+  </head>
+  <body onLoad="onLoad();" onResize="onResize()">
+      <ul id="path">
+      <li><a href="http://www.ucll.info/INE/" title="Home">INE eChile</a></li>
+      <li><a href="http://www.ucll.info/INE/testeo.html" title="Home">Datos de Población</a></li>
+      <li><span>Vitalidad</span></li>
+      <li><a href="http://www.ucll.info/INE/moneda.html" title="Home">Datos Economicos</a></li>
+      <li><a href="http://www.ucll.info/INE/ejercito.html" title="Home">Datos Militares</a></li>
+      <li><a href="http://www.ucll.info/INE/partidos.html" title="Home">Datos de Partidos</a></li>
+      <li><a href="http://www.ucll.info/INE/foro.html" title="Home">Miembros del Foro</a></li>
+      </ul>
+    <div id="header" width: 20em">
+    <h1>Vitalidad en eChile</h1>
+    </div>
+        <div id="header">
+          <h2><span style="color: #193441;">Promedio de vitalidad de todos los habitantes de eChile</span></h2></div>
+                <div id="timeplot1" style="height: 300px" class="timeplot"></div>
+        
+            <div id="footer">
+      Registrado &copy; <a href="http://www.ucll.info/INE/">INE eChile</a>, todos los datos son obtenidos desde la <a href="http://api.erepublik.com/">API de eRepublik</a>
+    </div>
+  </body>
+
+</html>
