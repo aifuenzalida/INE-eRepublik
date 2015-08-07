@@ -1,0 +1,41 @@
+<html>
+  <head>
+      <title>INE eChile | Estadisticas para eRepublik Chile</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <style>
+        .timeplot {
+            margin: 2em;
+        }
+    </style>
+    <link rel='stylesheet' href='common.css' type='text/css' />
+    <script src="http://api.simile-widgets.org/timeplot/1.1/timeplot-api.js" type="text/javascript"></script>
+    <script src="create-timeplots2.js" type="text/javascript"></script>
+
+      
+</head>
+
+ <body onLoad="onLoad();" onResize="onResize();">
+      <ul id="path">
+      <li><a href="http://www.ucll.info/INE/" title="Home">INE eChile</a></li>
+      <li><a href="http://www.ucll.info/INE/testeo.html" title="Home">Datos de Población</a></li>
+      <li><a href="http://www.ucll.info/INE/vitalidad.html" title="Home">Vitalidad</a></li>
+      <li><span>Datos Economicos</span></li>
+      <li><a href="http://www.ucll.info/INE/ejercito.html" title="Home">Datos Militares</a></li>
+      <li><a href="http://www.ucll.info/INE/partidos.html" title="Home">Datos de Partidos</a></li>
+      <li><a href="http://www.ucll.info/INE/foro.html" title="Home">Miembros del Foro</a></li>
+      </ul>
+    <div id="header">
+      <h1>Valor del CLP en Gold</h1>
+      </div>
+  <div id="timeplot0" class="timeplot" style="height: 200px;"></div>
+  
+  <div id="header">
+   <h1>Valor del Gold en CLP</h1>
+  </div>
+  <div id="timeplot1" class="timeplot" style="height: 200px;"></div>
+  
+      <div id="footer">
+      Registrado &copy; <a href="http://www.ucll.info/INE/">INE eChile</a>, todos los datos son obtenidos desde la <a href="http://api.erepublik.com/">API de eRepublik</a>
+    </div>
+   </body>
+</html>
